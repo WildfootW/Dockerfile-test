@@ -1,0 +1,15 @@
+version: "3"
+services:
+    ubuntu-test:
+        build:
+            context: ./build-context
+            dockerfile: Dockerfile
+        hostname: "ubuntu-test"
+        volumes:
+            - .:/home/WildfootW:rw
+#        expose:
+#            - "22"
+        ports:
+            - "10022:22"
+        cap_add:
+            - SYS_PTRACE
