@@ -1,0 +1,20 @@
+version: "3"
+services:
+    ubuntu-18:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        hostname: "ubuntu-18"
+        volumes:
+            - /home/wildfootw:/home/wildfootw:rw
+        cap_add:
+            - SYS_PTRACE
+        security_opt:
+            - seccomp:unconfined
+#        command: tail -F /dev/null
+
+
+# docker build -f Dockerfile -t gdbserver-ubuntu-18 .
+# docker run --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --volume "/home/wildfootw":"/home/wildfootw" --name gdbd-ubuntu-18 -it -P gdbserver-ubuntu-18 :56147 /home/wildfootw/b.out
+# docker port gdbd-ubuntu-18
+# <gdb> target remote localhost:32786 (return in docker port)

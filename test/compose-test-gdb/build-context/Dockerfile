@@ -5,7 +5,7 @@ MAINTAINER ${user_name}
 #ADD . /home/${user_name}
 #WORKDIR /home/${user_name}
 RUN useradd -m ${user_name} && usermod -a -G sudo ${user_name} && echo /bin/bash | chsh ${user_name}
-#RUN echo '${user_name}:' | chpasswd
+RUN echo '${user_name}:screencast' | chpasswd
 
 RUN sed -i 's/\(archive.ubuntu\|security.ubuntu\)/tw.archive.ubuntu/' /etc/apt/sources.list && apt-get update
 RUN apt-get install -y openssh-server && mkdir /var/run/sshd
