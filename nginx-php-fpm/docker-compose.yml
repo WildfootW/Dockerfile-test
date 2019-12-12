@@ -1,0 +1,21 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - "8001:80"
+        volumes:
+            - ./web-root:/web-root
+            - ./site-conf:/etc/nginx/conf.d
+        networks:
+            - nginx-php-fpm
+    php-fpm:
+        image: php:7-fpm
+        expose:
+            - "9000"
+        volumes:
+            - ./web-root:/web-root
+        networks:
+            - nginx-php-fpm
+networks:
+    nginx-php-fpm:
