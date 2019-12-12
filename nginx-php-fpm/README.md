@@ -1,6 +1,5 @@
 # nginx & php-fpm docker
 ###### tags: `readme` `tools` `docker` `nginx` `php-fpm`
-[TOC]
 ## tree
 ```
 ├── docker-compose.yml
