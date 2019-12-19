@@ -1,17 +1,19 @@
 version: "3"
 services:
-    ubuntu-18:
+    w:
         build:
             context: ./
             dockerfile: Dockerfile
-        hostname: "ubuntu-18"
+        hostname: "ubuntu-bionic"
+        ports:
+            - "7070:7070" # gdbserver
+            - "7071:7071" # exeport
         volumes:
-            - /home/wildfootw:/home/wildfootw:rw
+            - ./app:/opt/app:rw
         cap_add:
             - SYS_PTRACE
         security_opt:
             - seccomp:unconfined
-#        command: tail -F /dev/null
 
 
 # docker build -f Dockerfile -t gdbserver-ubuntu-18 .

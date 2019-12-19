@@ -1,21 +1,17 @@
-FROM ubuntu:18.04
-ENV MyUserName wildfootw
-ENV GDB_Server_Port 56147
+FROM ubuntu:bionic
 
-RUN useradd -m ${MyUserName} && usermod -a -G sudo ${MyUserName} && echo /bin/bash | chsh ${MyUserName}
-#RUN echo '${MyUserName}:MyPa55w0rd' | chpasswd
-
-RUN sed -i 's/\(archive.ubuntu\|security.ubuntu\)/tw.archive.ubuntu/' /etc/apt/sources.list && \
+RUN sed -i "s/\(archive.ubuntu.com\|security.ubuntu.com\)/free.nchc.org.tw/" "/etc/apt/sources.list" && \
     apt-get update && \
-    apt-get -y upgrade && \
-#    apt-get install -y binutils && \
-    apt-get install -y gdb gcc && \
-    apt-get install -y vim && \
+    apt-get -y upgrade
+
+ENV GDBPORT 7070
+ENV EXEPORT 7071
+EXPOSE ${GDBPORT} ${EXEPORT}
+
+RUN apt-get install -y gdbserver socat && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-EXPOSE ${GDB_Server_Port}
-#ENTRYPOINT ["/bin/sh"]
-ENTRYPOINT ["/usr/bin/gdbserver"]
-CMD [":56147", "/home/wildfootw/a.out"]
-
+CMD ["socat", "TCP-LISTEN:7071,fork,reuseaddr", "EXEC:gdbserver \\:7070 /opt/app/a.out"]
+#CMD ["sh", "-c", "socat TCP-LISTEN:${EXEPORT},fork,reuseaddr EXEC:'gdbserver \\:${GDBPORT} /opt/app/a.out'"]
+# ${GDBPORT} does not expand

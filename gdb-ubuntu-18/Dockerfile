@@ -1,9 +1,10 @@
 FROM ubuntu:bionic
-ENV MyUserName wildfootw
 
 RUN sed -i "s/\(archive.ubuntu.com\|security.ubuntu.com\)/free.nchc.org.tw/" "/etc/apt/sources.list" && \
     apt-get update && \
     apt-get -y upgrade
+
+ENV MyUserName wildfootw
 
 RUN apt-get install -y gdb gcc && \
     apt-get install -y zsh vim tmux && \
