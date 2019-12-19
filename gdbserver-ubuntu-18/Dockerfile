@@ -12,6 +12,6 @@ RUN apt-get install -y gdbserver socat && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-CMD ["socat", "TCP-LISTEN:7071,fork,reuseaddr", "EXEC:gdbserver \\:7070 /opt/app/a.out"]
+CMD ["socat", "TCP-LISTEN:7071,fork,reuseaddr", "EXEC:gdbserver \\:7070 /opt/docker-share/a.out"]
 #CMD ["sh", "-c", "socat TCP-LISTEN:${EXEPORT},fork,reuseaddr EXEC:'gdbserver \\:${GDBPORT} /opt/app/a.out'"]
 # ${GDBPORT} does not expand

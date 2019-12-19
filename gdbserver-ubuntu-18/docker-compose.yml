@@ -9,7 +9,7 @@ services:
             - "7070:7070" # gdbserver
             - "7071:7071" # exeport
         volumes:
-            - ./app:/opt/app:rw
+            - /opt/docker-share:/opt/docker-share:rw
         cap_add:
             - SYS_PTRACE
         security_opt:

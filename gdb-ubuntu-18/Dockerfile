@@ -19,9 +19,8 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-COPY ./app /opt/app
-WORKDIR /opt/app
-RUN python3 -m pip install -r requirements.txt
+COPY ./install-requirements /opt/install-requirements
+RUN python3 -m pip install -r /opt/install-requirements/requirements.txt
 
 RUN sed -i "s/\/root/\/home\/${MyUserName}/" "/etc/passwd"
 
